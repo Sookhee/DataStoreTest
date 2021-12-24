@@ -1,6 +1,5 @@
 package com.github.sookhee.datastoreexample.preference
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -21,7 +20,10 @@ class PreferenceViewModel @ViewModelInject constructor(
     fun getUiModePreference() {
         viewModelScope.launch {
             getPreferenceUseCase(KEY_UI_MODE).collect {
-                _uiMode.emit(it ?: false)
+                when (it as? Boolean) {
+                    true -> _uiMode.emit(true)
+                    else -> _uiMode.emit(false)
+                }
             }
         }
     }

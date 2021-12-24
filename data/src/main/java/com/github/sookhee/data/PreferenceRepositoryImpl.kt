@@ -12,7 +12,7 @@ class PreferenceRepositoryImpl @Inject constructor(
         preferenceDataSource.setPreference(key, value)
     }
 
-    override suspend fun getPreference(key: String): Flow<Boolean?> {
+    override suspend fun getPreference(key: String): Flow<*> {
         return preferenceDataSource.getPreference(key)
     }
 }
