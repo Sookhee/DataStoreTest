@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PreferenceDataSource {
     suspend fun setPreference(key: String, value: Boolean)
-    fun getPreference(key: String): Flow<Boolean?>
+    suspend fun getPreference(key: String): Flow<Boolean?>
 }

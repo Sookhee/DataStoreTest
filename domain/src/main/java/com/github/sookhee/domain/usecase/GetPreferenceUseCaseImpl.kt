@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetPreferenceUseCaseImpl @Inject constructor(
     private val preferenceRepository: PreferenceRepository
 ): GetPreferenceUseCase {
-    override fun invoke(key: String): Flow<Boolean?> {
+    override suspend fun invoke(key: String): Flow<Boolean?> {
         return preferenceRepository.getPreference(key)
     }
 }

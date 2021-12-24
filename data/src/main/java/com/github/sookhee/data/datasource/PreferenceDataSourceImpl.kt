@@ -25,7 +25,7 @@ class PreferenceDataSourceImpl @Inject constructor(
         }
     }
 
-    override fun getPreference(key: String): Flow<Boolean?> {
+    override suspend fun getPreference(key: String): Flow<Boolean?> {
         return context.dataStore.data
             .catch {
                 if (it is IOException) {

@@ -19,10 +19,8 @@ class PreferenceViewModel @ViewModelInject constructor(
     val uiMode: StateFlow<Boolean> = _uiMode
 
     fun getUiModePreference() {
-        val uiMode = getPreferenceUseCase(KEY_UI_MODE)
-
         viewModelScope.launch {
-            uiMode.collect {
+            getPreferenceUseCase(KEY_UI_MODE).collect {
                 _uiMode.emit(it ?: false)
             }
         }
