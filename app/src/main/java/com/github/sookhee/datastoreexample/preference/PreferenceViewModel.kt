@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class PreferenceViewModel @ViewModelInject constructor(
     private val getPreferenceUseCase: GetPreferenceUseCase,
     private val setPreferenceUseCase: SetPreferenceUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _uiMode = MutableStateFlow<Boolean>(false)
     val uiMode: StateFlow<Boolean> = _uiMode
 

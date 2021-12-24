@@ -6,7 +6,7 @@ import javax.inject.Inject
 class SetPreferenceUseCaseImpl @Inject constructor(
     private val preferenceRepository: PreferenceRepository
 ) : SetPreferenceUseCase {
-    override suspend fun invoke(key: String, value: Boolean) {
+    override suspend fun <T> invoke(key: String, value: T) {
         preferenceRepository.setPreference(key, value)
     }
 }

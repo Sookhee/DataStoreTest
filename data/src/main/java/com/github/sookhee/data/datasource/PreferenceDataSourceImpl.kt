@@ -3,10 +3,7 @@ package com.github.sookhee.data.datasource
 import kotlinx.coroutines.flow.Flow
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.catch
@@ -19,9 +16,16 @@ class PreferenceDataSourceImpl @Inject constructor(
 ) : PreferenceDataSource {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "datastore_pref")
 
-    override suspend fun setPreference(key: String, value: Boolean) {
+    override suspend fun <T> setPreference(key: String, value: T) {
         context.dataStore.edit { preferences ->
-            preferences[booleanPreferencesKey(key)] = value
+            when (value) {
+                is Boolean -> preferences[booleanPreferencesKey(key)] = value
+                is Double -> preferences[doublePreferencesKey(key)] = value
+                is Float -> preferences[floatPreferencesKey(key)] = value
+                is Int -> preferences[intPreferencesKey(key)] = value
+                is Long -> preferences[longPreferencesKey(key)] = value
+                else -> preferences[stringPreferencesKey(key)] = value.toString()
+            }
         }
     }
 

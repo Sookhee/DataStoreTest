@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface PreferenceRepository {
-    suspend fun setPreference(key: String, value: Boolean)
+    suspend fun <T> setPreference(key: String, value: T)
     suspend fun getPreference(key: String): Flow<Boolean?>
 }

@@ -7,8 +7,8 @@ import javax.inject.Inject
 
 class PreferenceRepositoryImpl @Inject constructor(
     private val preferenceDataSource: PreferenceDataSource
-): PreferenceRepository {
-    override suspend fun setPreference(key: String, value: Boolean) {
+) : PreferenceRepository {
+    override suspend fun <T> setPreference(key: String, value: T) {
         preferenceDataSource.setPreference(key, value)
     }
 
