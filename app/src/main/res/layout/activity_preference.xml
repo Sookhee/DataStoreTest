@@ -37,6 +37,28 @@
             android:onClick="@{()->viewModel.setNamePreference()}"
             android:text="이름 정보 Data Store에 저장 (String)" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:hint="나이">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@={viewModel.age}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSaveAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="@{()->viewModel.setAgePreference()}"
+            android:text="나이 정보 Data Store에 저장 (Int)" />
+
         <Button
             android:id="@+id/btnUiMode"
             android:layout_width="match_parent"

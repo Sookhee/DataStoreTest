@@ -28,6 +28,7 @@ class PreferenceActivity : AppCompatActivity() {
 
         viewModel.getUiModePreference()
         viewModel.getNamePreference()
+        viewModel.getAgePreference()
 
         initView()
         observeData()
@@ -41,7 +42,7 @@ class PreferenceActivity : AppCompatActivity() {
 
     private fun observeData() {
         viewModel.uiMode.asLiveData().observe(this) {
-            when(it) {
+            when (it) {
                 true -> setDarkMode()
                 false -> setLightMode()
             }
