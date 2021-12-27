@@ -3,6 +3,7 @@ package com.github.sookhee.data.datasource
 import kotlinx.coroutines.flow.Flow
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.SharedPreferencesMigration
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -14,7 +15,10 @@ import javax.inject.Inject
 class PreferenceDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : PreferenceDataSource {
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "datastore_pref")
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
+        name = FILE_NAME,
+        produceMigrations = { context -> listOf(SharedPreferencesMigration(context, SHARED_FILE_NAME)) }
+    )
 
     override suspend fun <T> setPreference(key: String, value: T) {
         context.dataStore.edit { preferences ->
@@ -40,5 +44,10 @@ class PreferenceDataSourceImpl @Inject constructor(
             }.map { preferences ->
                 preferences[booleanPreferencesKey(key)]
             }
+    }
+
+    companion object {
+        private const val FILE_NAME = "datastore_pref"
+        private const val SHARED_FILE_NAME = "shared_pref"
     }
 }

@@ -17,6 +17,9 @@ class PreferenceViewModel @ViewModelInject constructor(
     private val _uiMode = MutableStateFlow<Boolean>(false)
     val uiMode: StateFlow<Boolean> = _uiMode
 
+    private val _name = MutableStateFlow<String>("")
+    val name: StateFlow<String> = _name
+
     fun getUiModePreference() {
         viewModelScope.launch {
             getPreferenceUseCase(KEY_UI_MODE).collect {
@@ -34,7 +37,22 @@ class PreferenceViewModel @ViewModelInject constructor(
         }
     }
 
+    fun getNamePreference() {
+        viewModelScope.launch {
+            getPreferenceUseCase(KEY_NAME).collect {
+                _name.emit(it.toString())
+            }
+        }
+    }
+
+    fun setNamePreference(name: String) {
+        viewModelScope.launch {
+            setPreferenceUseCase(KEY_NAME, name)
+        }
+    }
+
     companion object {
         private const val KEY_UI_MODE = "ui_mode"
+        private const val KEY_NAME = "key_shared_name"
     }
 }
