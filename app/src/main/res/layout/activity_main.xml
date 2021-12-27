@@ -15,4 +15,10 @@
         android:layout_height="wrap_content"
         android:text="TEST : DATA STORE PREFERENCE" />
 
+    <Button
+        android:id="@+id/btnMigration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TEST : MIGRATION" />
+
 </LinearLayout>
