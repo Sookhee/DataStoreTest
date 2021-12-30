@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DataStoreExample">
         <activity
+            android:name=".preference.PluginTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".preference.PreferenceActivity"
             android:exported="false" />
         <activity
